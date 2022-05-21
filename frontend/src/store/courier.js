@@ -10,10 +10,12 @@ export const courierSlice = createSlice({
   initialState,
   reducers: {
     logInCourier: (state, action) => {
-      state.isLoggedIn = true;
+      state.isLoggedIn = action.payload.isLoggedIn;
+      state.name = action.payload.name;
     },
     logOutCourier: (state, action) => {
       state.isLoggedIn = false;
+      state.name = '';
     }
   },
   extraReducers: builder => {

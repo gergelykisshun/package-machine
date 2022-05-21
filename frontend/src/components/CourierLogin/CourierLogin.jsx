@@ -8,9 +8,11 @@ const CourierLogin = () => {
 
   const dispatch = useDispatch();
   const machineData = useSelector(state => state.machine.data.data);
-  console.log(machineData);
+  // console.log(machineData);
   const courierLoggedIn = useSelector(state => state.courier.isLoggedIn);
-  console.log(courierLoggedIn)
+  // console.log(courierLoggedIn)
+  const courierName = useSelector(state => state.courier.name);
+  console.log(courierName)
 
 
   const [input, setInput] = useState({
@@ -30,12 +32,32 @@ const CourierLogin = () => {
     }))
   }
 
-  const toggleSizeScreen = () => {
-    dispatch(logInCourier());
+  const initLogin = () => {
+    fetch('/api/v1/login/login', {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(input)
+    }).then(res => res.json())
+    .then(response => {
+      if(response.success){
+        dispatch(logInCourier(response));
+      }
+    }).catch(err => console.log(err))
+
+
   };
   
-  const toggleSizeScreenBack = () => {
-    dispatch(logOutCourier());    
+  const initLogOut = () => {
+    fetch('/api/v1/login/logout')
+    .then(res => res.json())
+    .then(response => {
+      if(response.success){
+        dispatch(logOutCourier()); 
+        setInput({name: '', password: ''})   
+      }
+    }).catch(err => console.log(err))
   };
 
 
@@ -56,13 +78,13 @@ const CourierLogin = () => {
             <h2 className='size-title'>C</h2>
             {machineData.cParcels.map(parcel => parcel.empty && <ParcelContainer size="c" key={parcel._id} info={parcel}/>)}
           </div>
-          <button onClick={toggleSizeScreenBack} className='secondary-btn courier-login-btn' style={{color: 'var(--primary-color)'}}>Back</button>
+          <button onClick={initLogOut} className='secondary-btn courier-login-btn' style={{color: 'var(--primary-color)'}}>Back</button>
         </section>  
         :
         <section className='courier-login'>
           <input className='input-style' type="text" name='name' placeholder='name' onChange={inputHandler} value={input.name}/>
           <input className='input-style' type="password" name="password" placeholder='password' onChange={inputHandler} value={input.password}/>
-          <button onClick={toggleSizeScreen} className='primary-btn courier-login-btn'>Login</button>
+          <button onClick={initLogin} className='primary-btn courier-login-btn'>Login</button>
         </section>
       }
     </>

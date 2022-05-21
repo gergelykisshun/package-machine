@@ -1,26 +1,9 @@
 const passport = require('passport');
 const { Strategy } = require('passport-local');
- const Machine = require('../database/schemas/packageMachine');
+ const Courier = require('../database/schemas/courier');
 const {checkHashedPassword} = require('../utils/helpers');
 
-// passport.serializeUser((user, done) => {
-//   // console.log('serializing user');
-//   // console.log(user);
-//   done(null, user.id);
-//   })
 
-// passport.deserializeUser(async (u, done) => {
-//   console.log('deserialize')
-//   // console.log(id);
-//   try{
-//     const user = User.findById(u.id);
-//     if(!user) throw new Error('no user found')
-//     console.log(user.username)
-//     done(null, user);
-//   } catch(err){
-//     done(err, null);
-//   }
-// })
 
 passport.serializeUser((user, done) => {
   done(null, user._id);
@@ -28,7 +11,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((_id, done) => {
   //fix
-  Machine.findById( _id, (err, user) => {
+  Courier.findById( _id, (err, user) => {
     if(err){
         done(null, false, {error:err});
     } else {
@@ -39,17 +22,17 @@ passport.deserializeUser((_id, done) => {
 
 passport.use(
   new Strategy({
-    usernameField: 'username'
-  }, async (username, password, done) => {
+    usernameField: 'name'
+  }, async (name, password, done) => {
     try {
-      if (!username || !password){
+      if (!name || !password){
         throw new Error('Bad request');
       }
       //
-      const user = await Machine.findOne({username});
-      if(!user) throw new Error('user not found');
-      if(checkHashedPassword(password, user.password)){
-        done(null, user);
+      const courier = await Courier.findOne({name: name});
+      if(!courier) throw new Error('user not found');
+      if(checkHashedPassword(password, courier.password)){
+        done(null, courier);
       } else {
         done(null, null);
       }
