@@ -22,7 +22,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home/>} exact/>
             <Route path='/courier-login' element={<CourierLogin/>}/>
-            <Route path='/courier-send/:parcelID' element={<CourierSend/>}/>
+            <Route path='/courier-send/:size/:parcelID' element={<CourierSend/>}/>
             <Route path='/client-pickup' element={<ClientPickUp/>}/>
             <Route path='*' element={<ErrorPage/>}/>
           </Routes>

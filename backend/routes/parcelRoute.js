@@ -9,6 +9,13 @@ router.post('/machine-data', (req, res) => {
   });
 });
 
+router.post('/dropOff', (req, res) => {
+  Machine.findByIdAndUpdate(req.body.id , {data: req.body.data},{ new: true }, (err, doc) => {
+    if(err) res.status(400).json({msg: err});
+    res.status(200).json({data: doc});
+  });
+});
+
 
 
 // router.get('/my-projects', (req, res) => {

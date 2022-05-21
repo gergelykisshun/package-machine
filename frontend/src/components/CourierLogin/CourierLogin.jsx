@@ -41,15 +41,15 @@ const CourierLogin = () => {
         <section className='size-screen'>
           <div className="size-container">
             <h2 className='size-title'>A</h2>
-            {machineData.aParcels.map(parcel => parcel.empty && <ParcelContainer key={parcel._id} info={parcel}/>)}
+            {machineData.aParcels.map(parcel => parcel.empty && <ParcelContainer size="a" key={parcel._id} info={parcel}/>)}
           </div>
           <div className="size-container">
             <h2 className='size-title'>B</h2>
-            {machineData.bParcels.map(parcel => parcel.empty && <ParcelContainer key={parcel._id} info={parcel}/>)}
+            {machineData.bParcels.map(parcel => parcel.empty && <ParcelContainer size="b" key={parcel._id} info={parcel}/>)}
           </div>
           <div className="size-container">
             <h2 className='size-title'>C</h2>
-            {machineData.cParcels.map(parcel => parcel.empty && <ParcelContainer key={parcel._id} info={parcel}/>)}
+            {machineData.cParcels.map(parcel => parcel.empty && <ParcelContainer size="c" key={parcel._id} info={parcel}/>)}
           </div>
           <button onClick={toggleSizeScreen} className='secondary-btn courier-login-btn' style={{color: 'var(--primary-color)'}}>Back</button>
         </section>  
