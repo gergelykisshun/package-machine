@@ -6,7 +6,7 @@ const initialState = {
   error: null
 }
 
-// FETCH MACHINE DATA            PUT MACHINE ID IN ENV!!!
+// FETCH MACHINE DATA 
 export const fetchMachine = createAsyncThunk('machine/getMachineData', ( async (params, {dispatch, getState}) => {
   try {
     const res = await fetch('/api/v1/parcel/machine-data', {
@@ -23,7 +23,7 @@ export const fetchMachine = createAsyncThunk('machine/getMachineData', ( async (
   }
 }));
 
-
+// INITIATE DROP-OFF
 export const dropOffPackage = createAsyncThunk('machine/dropOffPackage', (async (toSend, {dispatch, getState}) => {
   try {
     const dataToSend = {

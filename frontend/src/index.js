@@ -7,12 +7,14 @@ import { Provider } from 'react-redux';
 import machineReducer from './store/machine';
 import themeReducer from './store/theme';
 import toastReducer from './store/toastMessage';
+import courierReducer from './store/courier';
 
 const store = configureStore({
   reducer: {
     machine: machineReducer,
     theme: themeReducer,
-    toast: toastReducer
+    toast: toastReducer,
+    courier: courierReducer
   }
 });
 
