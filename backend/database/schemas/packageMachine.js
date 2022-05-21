@@ -1,14 +1,6 @@
 const mongoose = require('mongoose');
 
 const packageMachineSchema = new mongoose.Schema({
-  couriers: {
-    type: [
-      {
-        name : String,
-        password : String
-      }
-    ]
-  },
   aParcels: {
     type: [
       {

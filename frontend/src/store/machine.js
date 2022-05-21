@@ -11,7 +11,7 @@ export const fetchMachine = createAsyncThunk('machine/getMachineData', ( async (
   try {
     const res = await fetch('/api/v1/parcel/machine-data', {
       method: "POST",
-      body: JSON.stringify({id: "62881843862ac039610c777f"}),
+      body: JSON.stringify({id: process.env.REACT_APP_MACHINE_ID}),
       headers: {
         "Content-Type": "application/json"
       }
@@ -27,7 +27,7 @@ export const fetchMachine = createAsyncThunk('machine/getMachineData', ( async (
 export const dropOffPackage = createAsyncThunk('machine/dropOffPackage', (async (toSend, {dispatch, getState}) => {
   try {
     const dataToSend = {
-      id: "62881843862ac039610c777f",
+      id: process.env.REACT_APP_MACHINE_ID,
       data: toSend
     }
     const res = await fetch('/api/v1/parcel/dropOff', {
