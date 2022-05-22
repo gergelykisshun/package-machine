@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ParcelContainer from '../ParcelContainer/ParcelContainer';
 import { logInCourier, logOutCourier } from '../../store/courier';
+import Tooltip from '@mui/material/Tooltip';
+import InfoIcon from '@mui/icons-material/Info';
 
 const CourierLogin = () => {
 
@@ -61,6 +63,12 @@ const CourierLogin = () => {
     }).catch(err => console.log(err))
   };
 
+  const autoFillInput = () => {
+    setInput({
+      name: 'Jon',
+      password: 'Jon'
+    })
+  };
 
   return (
     <>
@@ -83,6 +91,9 @@ const CourierLogin = () => {
         </section>  
         :
         <section className='courier-login'>
+          <Tooltip className='tool-tip-style' title="Easy-login autofill" arrow>
+            <InfoIcon onClick={autoFillInput}/>
+          </Tooltip>
           <input className='input-style' type="text" name='name' placeholder='name' onChange={inputHandler} value={input.name}/>
           <input className='input-style' type="password" name="password" placeholder='password' onChange={inputHandler} value={input.password}/>
           <button onClick={initLogin} className='primary-btn courier-login-btn'>Login</button>
