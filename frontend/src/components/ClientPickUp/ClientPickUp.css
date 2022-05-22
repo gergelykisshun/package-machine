@@ -1,0 +1,5 @@
+.feedback-text{
+  color: var(--primary-color);
+  text-align: center;
+  line-height: 50px;
+}

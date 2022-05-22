@@ -78,8 +78,8 @@ const CourierSend = () => {
     </div>
   } else if(status === 'succeeded'){
     content = 
-    <div style={{width: '100%', height: '100vh', display: 'flex', alignItems:'center', justifyContent:'center'}}>
-      <h2>Drop-off is successful! The system is logging you out!</h2>
+    <div className='feedback-text'>
+      <h2>Drop-off is successful!<br/>You are being logged out!</h2>
     </div>
   }
 

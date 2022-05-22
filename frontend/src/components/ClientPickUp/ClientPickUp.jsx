@@ -75,9 +75,10 @@ const ClientPickUp = () => {
     </div>
   } else if(status === 'succeeded'){
     content = 
-    <div style={{width: '100%', height: '100vh', display: 'flex', alignItems:'center', justifyContent:'center'}}>
-      <h2>Pick-up is successful! Please take your package!</h2>
-    </div>
+    <>
+      <h2 className='feedback-text'>Pick-up is successful! Please take your package!</h2>
+    </>
+    
   }
 
 
