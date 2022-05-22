@@ -12,10 +12,11 @@ router.post('/machine-data', (req, res) => {
 });
 
 router.post('/drop-off', async (req, res) => {
+  console.log(req.body);
   let { newParcelArray } = req.body.data;
   const { size, parcelID } = req.body.data.parcelToUpdate;
 
-  if(!req.body.password){
+  if(!req.body.data.password){
     newParcelArray = newParcelArray.map(parcel => {
       if(parcel._id === parcelID){
         return {...parcel, password: hashPassword(parcel.password)}
@@ -24,7 +25,7 @@ router.post('/drop-off', async (req, res) => {
       }
     });
   } else {
-    if(!checkHashedPassword(newParcelArray.find(parcel => parcel.name === req.body.parcelToUpdate.name).password, req.body.password)){
+    if(!checkHashedPassword(newParcelArray.find(parcel => parcel.name === req.body.parcelToUpdate.name).password, req.body.data.password)){
       return res.status(403).json({err: 'Wrong password!'})
     };
   }
