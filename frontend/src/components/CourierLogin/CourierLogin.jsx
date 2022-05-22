@@ -65,8 +65,8 @@ const CourierLogin = () => {
 
   const autoFillInput = () => {
     setInput({
-      name: 'Jon',
-      password: 'Jon'
+      name: 'John',
+      password: 'John'
     })
   };
 

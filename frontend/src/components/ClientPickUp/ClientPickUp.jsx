@@ -38,7 +38,7 @@ const ClientPickUp = () => {
     const {value, name} = e.target;
     setInput(prev => ({
       ...prev,
-      [name]: value.toLowerCase()
+      [name]: value
     }))
   }
 
@@ -49,6 +49,7 @@ const ClientPickUp = () => {
     if(input.password === ''){
       return dispatch(showToast(`Please enter your password!`));
     }
+    input.parcelName = input.parcelName.toLowerCase();
     const copyData = {...machineData};
     const newParcelArray = copyData[`${input.parcelName[0]}Parcels`];
     const selectedParcel = newParcelArray.find(parcel => parcel.name === input.parcelName);
