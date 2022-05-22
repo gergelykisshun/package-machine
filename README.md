@@ -6,7 +6,7 @@ Create route can create new couriers and new machines. Could create an admin app
   - name: string
   - password: string (hashed on registering for safety)
 - Courier endpoint: 
-  - localhost:3001/api/v1/create/new-courier
+  - /api/v1/create/new-courier
 
 - Machine schema:
   - aParcels: array of objects
@@ -15,7 +15,7 @@ Create route can create new couriers and new machines. Could create an admin app
   - Schema of parcel objects populating these arrays:
     - password: string, name: string, empty: boolean
 - Machine endpoint: 
-  - localhost:3001/api/v1/create/new-machine
+  - /api/v1/create/new-machine
 - Creating is simplified by only needing to send the numbers of parcels we would like the machine to have in each size. 
 
 ## .ENV ON FRONTEND
