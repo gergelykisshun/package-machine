@@ -65,8 +65,8 @@ const ClientPickUp = () => {
       <h3 style={{color: 'var(--primary-color)'}}>Please enter the following:</h3>
       <input className='input-style' type="text" name='parcelID' placeholder='parcel ID' onChange={inputHandler} value={input.parcelID}/>
       <input className='input-style' type="password" name="password" placeholder='password' onChange={inputHandler} value={input.password}/>
-      <button onClick={initPickUpHandler} className='primary-btn courier-login-btn'>Pick-up Package</button>
-      <Link to="/" className='secondary-btn courier-login-btn'>back</Link>
+      <button onClick={initPickUpHandler} className='primary-btn'>Pick-up Package</button>
+      <Link to="/" className='secondary-btn confirm-send'>Back</Link>
     </>
   } else if(status === 'loading'){
     content = 

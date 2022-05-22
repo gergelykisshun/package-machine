@@ -6,8 +6,8 @@ const ParcelContainer = ({size, info}) => {
 
   return (
     <div className='parcel-container'>
-      <p>Parcel ID: {info._id}</p>
-      <Link to={`/courier-send/${size}/${info._id}/${info.name}`} className='primary-btn courier-login-btn'>Select</Link>
+      <h3 style={{color:'var(--primary-color'}}>{info.name}</h3>
+      <Link to={`/courier-send/${size}/${info._id}/${info.name}`} className='primary-btn parcel-btn'>Select</Link>
     </div>
   )
 }

@@ -65,11 +65,11 @@ const CourierSend = () => {
   if(status === 'idle'){
     content = 
     <>
-      <h3 style={{color: 'var(--primary-color)'}}>Parcel ID: {name}</h3>
-      <h3 style={{color: 'var(--primary-color)'}}>Password: {input.password}</h3>
-      <button onClick={createNewCode} className='secondary-btn courier-login-btn'>Generate new code</button>
-      <button onClick={initDropOffHandler} className='primary-btn courier-login-btn'>Drop-off package</button>
-      <Link to="/courier-login" className='secondary-btn courier-login-btn'>Back</Link>
+      <h3 className='confirm-send'>Parcel ID: {name}</h3>
+      <h3 className='confirm-send'>Password: {input.password}</h3>
+      <button className='secondary-btn confirm-send'onClick={createNewCode}>Generate new code</button>
+      <button className='primary-btn'onClick={initDropOffHandler}>Drop-off package</button>
+      <Link to="/courier-login" className='secondary-btn confirm-send'>Back</Link>
     </>
   } else if(status === 'loading'){
     content = 

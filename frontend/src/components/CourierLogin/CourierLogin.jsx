@@ -79,14 +79,14 @@ const CourierLogin = () => {
             <h2 className='size-title'>C</h2>
             {machineData.cParcels.map(parcel => parcel.empty && <ParcelContainer size="c" key={parcel._id} info={parcel}/>)}
           </div>
-          <button onClick={initLogOut} className='secondary-btn courier-login-btn' style={{color: 'var(--primary-color)'}}>Back</button>
+          <button onClick={initLogOut} className='secondary-btn back-btn' style={{color: 'var(--primary-color)'}}>Back</button>
         </section>  
         :
         <section className='courier-login'>
           <input className='input-style' type="text" name='name' placeholder='name' onChange={inputHandler} value={input.name}/>
           <input className='input-style' type="password" name="password" placeholder='password' onChange={inputHandler} value={input.password}/>
           <button onClick={initLogin} className='primary-btn courier-login-btn'>Login</button>
-          <Link to="/" className='secondary-btn courier-login-btn' style={{color: 'var(--primary-color)'}}>Back</Link>
+          <Link to="/" className='secondary-btn confirm-send'>Back</Link>
         </section>
       }
     </>

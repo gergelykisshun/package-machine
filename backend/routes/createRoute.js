@@ -10,11 +10,13 @@ const { nanoid } = require('nanoid');
 router.post('/new-machine', (req, res) => {
   console.log(req.body)
 
+  let count = 0;
   const parcelCreator = (numOfP, tag) => {
     return new Array(parseInt(numOfP)).fill('0').map(el => {
+      count++;
       return {
         password: '',
-        name: `${tag}-${nanoid().slice(0, 4)}`,
+        name: `${tag}-${count}`,
         empty: true
       }
     });
