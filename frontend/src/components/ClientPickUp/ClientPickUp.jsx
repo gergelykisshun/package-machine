@@ -38,7 +38,7 @@ const ClientPickUp = () => {
     const {value, name} = e.target;
     setInput(prev => ({
       ...prev,
-      [name]: value
+      [name]: value.toLowerCase()
     }))
   }
 
