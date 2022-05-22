@@ -11,7 +11,9 @@ const ClientPickUp = () => {
   const dispatch = useDispatch();
 
   const machineData = useSelector(state => state.machine.data.data);
+  console.log(machineData);
   const status = useSelector(state => state.machine.status);
+  console.log(status);
 
   useEffect(() => {
     if(status === 'succeeded'){
@@ -23,7 +25,7 @@ const ClientPickUp = () => {
 
 
   const [input, setInput] = useState({
-    parcelID: '',
+    parcelName: '',
     password: ''
   })
 
@@ -37,20 +39,15 @@ const ClientPickUp = () => {
 
   const initPickUpHandler = () => {
     const copyData = {...machineData};
-    const newParcelArray = copyData[`${input.parcelID[0]}Parcels`].map(parcel => {
-      if(parcel.name === input.parcelID){
-        return {...parcel, empty: true, password: ''}
-      } else {
-        return parcel
-      }
-    });
+    const newParcelArray = copyData[`${input.parcelName[0]}Parcels`];
+    const parcelID = newParcelArray.find(parcel => parcel.name === input.parcelName)._id;
     // console.log(copyData);
     const toSend = {
       password: input.password,
       newParcelArray,
       parcelToUpdate: {
-        name: input.parcelID,
-        size: input.parcelID[0]
+        parcelID,
+        size: input.parcelName[0]
       }
     }
     dispatch(dropOffPackage(toSend))
@@ -63,7 +60,7 @@ const ClientPickUp = () => {
     content = 
     <>
       <h3 style={{color: 'var(--primary-color)'}}>Please enter the following:</h3>
-      <input className='input-style' type="text" name='parcelID' placeholder='parcel ID' onChange={inputHandler} value={input.parcelID}/>
+      <input className='input-style' type="text" name='parcelName' placeholder='parcel name' onChange={inputHandler} value={input.parcelName}/>
       <input className='input-style' type="password" name="password" placeholder='password' onChange={inputHandler} value={input.password}/>
       <button onClick={initPickUpHandler} className='primary-btn'>Pick-up Package</button>
       <Link to="/" className='secondary-btn confirm-send'>Back</Link>

@@ -11,8 +11,9 @@ router.post('/machine-data', (req, res) => {
   });
 });
 
+
 router.post('/drop-off', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let { newParcelArray } = req.body.data;
   const { size, parcelID } = req.body.data.parcelToUpdate;
 
@@ -25,13 +26,21 @@ router.post('/drop-off', async (req, res) => {
       }
     });
   } else {
-    if(!checkHashedPassword(newParcelArray.find(parcel => parcel.name === req.body.parcelToUpdate.name).password, req.body.data.password)){
+    const parcelPass = newParcelArray.find(parcel => parcel._id === parcelID).password;
+    // console.log(newParcelArray);
+    // console.log(parcelID);
+    console.log(parcelPass);
+    console.log(req.body.data.password);
+    if(!checkHashedPassword(req.body.data.password, parcelPass)){
       return res.status(403).json({err: 'Wrong password!'})
-    };
+    } else {
+      console.log('checked pass and passed')
+      newParcelArray = newParcelArray.map(parcel => ({...parcel, empty: true, password: ''}));
+    }
   }
 
   Machine.findByIdAndUpdate( req.body.id, { [`${size}Parcels`]: newParcelArray}, {new: true}, (err, doc) => {
-    if(err) res.status(400).json({fail: err})
+    if(err) res.status(400).json({err: err})
     res.status(200).json({success: doc})
   });
 });

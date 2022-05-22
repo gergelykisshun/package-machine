@@ -65,7 +65,11 @@ export const machineSlice = createSlice({
       state.status = 'loading';
     }).addCase(dropOffPackage.fulfilled, (state, action) => {
       state.status = 'succeeded';
-      state.data = action.payload.success;
+      if(action.payload.success){
+        state.data = action.payload.success;
+      } else if(action.payload.err){
+        state.error = action.payload.err;
+      }
     }).addCase(dropOffPackage.rejected, (state, action) => {
       state.status = 'failed';
       state.error = action.error.message;
