@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchMachine } from '../../store/machine';
+import { removeToast } from '../../store/toastMessage';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
@@ -8,6 +9,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(removeToast());
     dispatch(fetchMachine());
   }, [dispatch])
 
