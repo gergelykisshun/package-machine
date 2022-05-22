@@ -38,7 +38,7 @@ export const dropOffPackage = createAsyncThunk('machine/dropOffPackage', (async 
       body: JSON.stringify(dataToSend)
     });
     const response = await res.json();
-    console.log(response)
+    return response;
   } catch(err){
     console.log(err);
   }
@@ -54,9 +54,19 @@ export const machineSlice = createSlice({
     builder.addCase(fetchMachine.pending, (state) => {
       state.status = 'loading';
     }).addCase(fetchMachine.fulfilled, (state, action) => {
-      state.status = 'succeeded';
+      state.status = 'idle';
       state.data = action.payload;
     }).addCase(fetchMachine.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    });
+
+    builder.addCase(dropOffPackage.pending, (state) => {
+      state.status = 'loading';
+    }).addCase(dropOffPackage.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      state.data = action.payload.success;
+    }).addCase(dropOffPackage.rejected, (state, action) => {
       state.status = 'failed';
       state.error = action.error.message;
     });

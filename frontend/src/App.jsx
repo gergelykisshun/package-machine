@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Home from './components/Home/Home';
@@ -6,15 +6,9 @@ import ErrorPage from './components/ErrorPage/ErrorPage';
 import CourierLogin from './components/CourierLogin/CourierLogin';
 import CourierSend from './components/CourierSend/CourierSend';
 import ClientPickUp from './components/ClientPickUp/ClientPickUp';
-import { useDispatch } from 'react-redux';
-import { fetchMachine } from './store/machine'
 
 
 const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchMachine());
-  }, [dispatch])
 
   return (
       <BrowserRouter>
