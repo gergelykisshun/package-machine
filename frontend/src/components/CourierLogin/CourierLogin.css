@@ -40,6 +40,23 @@
 .size-screen .back-btn {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 50%;
+  transform: translateX(50%);
+}
+
+
+@media screen and (max-width: 550px) {
+  .size-screen {
+    flex-direction: column;
+    padding: 100px 0 20px 0;
+  }
+  .size-container {
+    height: unset;
+  }
+  .size-screen .back-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    transform: unset;
+  }
 }

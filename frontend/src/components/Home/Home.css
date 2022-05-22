@@ -16,3 +16,10 @@
   font-size: 30px;
   font-weight: 700;
 }
+
+
+@media screen and (max-width: 550px) {
+  .home-container {
+    flex-direction: column;
+  }
+}
