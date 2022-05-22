@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './ClientPickUp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { dropOffPackage } from '../../store/machine';
+import { dropOffPackage, setErrorNull } from '../../store/machine';
+import { showToast, removeToast } from '../../store/toastMessage';
 import CircularProgress from '@mui/material/CircularProgress';
 
 
@@ -11,17 +12,25 @@ const ClientPickUp = () => {
   const dispatch = useDispatch();
 
   const machineData = useSelector(state => state.machine.data.data);
-  console.log(machineData);
   const status = useSelector(state => state.machine.status);
   console.log(status);
+  const error = useSelector(state => state.machine.error);
+  console.log(error);
 
   useEffect(() => {
-    if(status === 'succeeded'){
+    if(status === 'succeeded' && !error){
+      dispatch(removeToast());
       setTimeout(() => {
         navigate("/");
       }, 3000)
+    } else if(status === 'succeeded' && error){
+      dispatch(removeToast());
+      setTimeout(() => {
+        navigate("/");
+        dispatch(setErrorNull());
+      }, 3000)
     }
-  }, [dispatch, status, navigate])
+  }, [dispatch, status, navigate, error])
 
 
   const [input, setInput] = useState({
@@ -40,7 +49,11 @@ const ClientPickUp = () => {
   const initPickUpHandler = () => {
     const copyData = {...machineData};
     const newParcelArray = copyData[`${input.parcelName[0]}Parcels`];
-    const parcelID = newParcelArray.find(parcel => parcel.name === input.parcelName)._id;
+    const selectedParcel = newParcelArray.find(parcel => parcel.name === input.parcelName);
+    if (selectedParcel.empty) {
+      return dispatch(showToast(`${input.parcelName} is empty!`));
+    }
+    const parcelID = selectedParcel._id;
     // console.log(copyData);
     const toSend = {
       password: input.password,
@@ -72,8 +85,12 @@ const ClientPickUp = () => {
     </div>
   } else if(status === 'succeeded'){
     content = 
+    !error ? 
     <>
       <h2 className='feedback-text'>Pick-up is successful! Please take your package!</h2>
+    </> :
+    <>
+      <h2 className='feedback-text'>Pick-up failed!<br/>{error}</h2>
     </>
     
   }

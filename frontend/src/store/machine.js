@@ -48,7 +48,9 @@ export const machineSlice = createSlice({
   name: "machine",
   initialState,
   reducers: {
-
+    setErrorNull: (state) => {
+      state.error = null;
+    }
   },
   extraReducers: builder => {
     builder.addCase(fetchMachine.pending, (state) => {
@@ -77,6 +79,6 @@ export const machineSlice = createSlice({
   }
 })
 
-export const machineActions = machineSlice.actions;
+export const { setErrorNull } = machineSlice.actions;
 
 export default machineSlice.reducer;
