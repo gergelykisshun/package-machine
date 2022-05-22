@@ -5,7 +5,7 @@ const packageMachineSchema = new mongoose.Schema({
     type: [
       {
         password: String,
-        name: mongoose.SchemaTypes.Mixed,
+        name: String,
         empty: Boolean
       }
     ]
@@ -14,7 +14,7 @@ const packageMachineSchema = new mongoose.Schema({
     type: [
       {
         password: String,
-        name: mongoose.SchemaTypes.Mixed,
+        name: String,
         empty: Boolean
       }
     ]
@@ -23,7 +23,7 @@ const packageMachineSchema = new mongoose.Schema({
     type: [
       {
         password: String,
-        name: mongoose.SchemaTypes.Mixed,
+        name: String,
         empty: Boolean
       }
     ]

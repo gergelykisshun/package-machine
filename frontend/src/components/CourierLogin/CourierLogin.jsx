@@ -6,6 +6,8 @@ import ParcelContainer from '../ParcelContainer/ParcelContainer';
 import { logInCourier, logOutCourier } from '../../store/courier';
 import Tooltip from '@mui/material/Tooltip';
 import InfoIcon from '@mui/icons-material/Info';
+import { showToast, removeToast } from '../../store/toastMessage';
+
 
 const CourierLogin = () => {
 
@@ -36,6 +38,13 @@ const CourierLogin = () => {
   }
 
   const initLogin = () => {
+    if (input.name === ''){
+      return dispatch(showToast('Enter your username!'))
+    }
+    if (input.password === ''){
+      return dispatch(showToast('Enter your password!'))
+    }
+    dispatch(removeToast());
     fetch('/api/v1/login/login', {
       headers: {
         "Content-Type": "application/json"
