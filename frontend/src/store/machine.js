@@ -30,7 +30,7 @@ export const dropOffPackage = createAsyncThunk('machine/dropOffPackage', (async 
       id: process.env.REACT_APP_MACHINE_ID,
       data: toSend
     }
-    const res = await fetch('/api/v1/parcel/dropOff', {
+    const res = await fetch('/api/v1/parcel/drop-off', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
