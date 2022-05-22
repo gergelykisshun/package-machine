@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ClientPickUp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { dropOffPackage, setErrorNull } from '../../store/machine';
+import { dropOffPackage, setErrorNull, setToIdle } from '../../store/machine';
 import { showToast, removeToast } from '../../store/toastMessage';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -13,20 +13,16 @@ const ClientPickUp = () => {
 
   const machineData = useSelector(state => state.machine.data.data);
   const status = useSelector(state => state.machine.status);
-  console.log(status);
+  // console.log(status);
   const error = useSelector(state => state.machine.error);
-  console.log(error);
+  // console.log(error);
 
   useEffect(() => {
-    if(status === 'succeeded' && !error){
+    if(status === 'succeeded'){
       dispatch(removeToast());
       setTimeout(() => {
         navigate("/");
-      }, 3000)
-    } else if(status === 'succeeded' && error){
-      dispatch(removeToast());
-      setTimeout(() => {
-        navigate("/");
+        dispatch(setToIdle());
         dispatch(setErrorNull());
       }, 3000)
     }
@@ -47,6 +43,12 @@ const ClientPickUp = () => {
   }
 
   const initPickUpHandler = () => {
+    if(input.parcelName === ''){
+      return dispatch(showToast(`Please enter your parcel name!`));
+    }
+    if(input.password === ''){
+      return dispatch(showToast(`Please enter your password!`));
+    }
     const copyData = {...machineData};
     const newParcelArray = copyData[`${input.parcelName[0]}Parcels`];
     const selectedParcel = newParcelArray.find(parcel => parcel.name === input.parcelName);

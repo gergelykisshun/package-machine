@@ -50,6 +50,9 @@ export const machineSlice = createSlice({
   reducers: {
     setErrorNull: (state) => {
       state.error = null;
+    },
+    setToIdle: (state) => {
+      state.status = 'idle';
     }
   },
   extraReducers: builder => {
@@ -79,6 +82,6 @@ export const machineSlice = createSlice({
   }
 })
 
-export const { setErrorNull } = machineSlice.actions;
+export const { setErrorNull, setToIdle } = machineSlice.actions;
 
 export default machineSlice.reducer;

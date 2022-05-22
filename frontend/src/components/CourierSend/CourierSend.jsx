@@ -65,7 +65,7 @@ const CourierSend = () => {
   if(status === 'idle'){
     content = 
     <>
-      <h3 className='confirm-send'>Parcel ID: {name}</h3>
+      <h3 className='confirm-send'>Parcel ID: {name.toUpperCase()}</h3>
       <h3 className='confirm-send'>Password: {input.password}</h3>
       <button className='secondary-btn confirm-send'onClick={createNewCode}>Generate new code</button>
       <button className='primary-btn'onClick={initDropOffHandler}>Drop-off package</button>
