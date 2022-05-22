@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const Machine = require('../database/schemas/packageMachine');
-const { hashPassword } = require('../utils/helpers')
+const { hashPassword, checkHashedPassword } = require('../utils/helpers')
 
 
 router.post('/machine-data', (req, res) => {
@@ -15,13 +15,19 @@ router.post('/drop-off', async (req, res) => {
   let { newParcelArray } = req.body.data;
   const { size, parcelID } = req.body.data.parcelToUpdate;
 
-  newParcelArray = newParcelArray.map(parcel => {
-    if(parcel._id === parcelID){
-      return {...parcel, password: hashPassword(parcel.password)}
-    } else {
-      return parcel
-    }
-  });
+  if(!req.body.password){
+    newParcelArray = newParcelArray.map(parcel => {
+      if(parcel._id === parcelID){
+        return {...parcel, password: hashPassword(parcel.password)}
+      } else {
+        return parcel
+      }
+    });
+  } else {
+    if(!checkHashedPassword(newParcelArray.find(parcel => parcel.name === req.body.parcelToUpdate.name).password, req.body.password)){
+      return res.status(403).json({err: 'Wrong password!'})
+    };
+  }
 
   Machine.findByIdAndUpdate( req.body.id, { [`${size}Parcels`]: newParcelArray}, {new: true}, (err, doc) => {
     if(err) res.status(400).json({fail: err})
@@ -29,9 +35,5 @@ router.post('/drop-off', async (req, res) => {
   });
 });
 
-
-router.post('/pick-up', async (req, res) => {
-  
-});
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const passport = require('passport');
 const { Strategy } = require('passport-local');
- const Courier = require('../database/schemas/courier');
+const Courier = require('../database/schemas/courier');
 const {checkHashedPassword} = require('../utils/helpers');
 
 

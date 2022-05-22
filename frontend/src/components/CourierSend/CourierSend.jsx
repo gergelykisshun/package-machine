@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const CourierSend = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
-  const { parcelID, size } = useParams();
+  const { parcelID, size, name } = useParams();
 
   const machineData = useSelector(state => state.machine.data.data);
   const status = useSelector(state => state.machine.status);
@@ -27,7 +27,7 @@ const CourierSend = () => {
         navigate("/");
       }, 3000)
     }
-  }, [dispatch, status])
+  }, [dispatch, status, navigate])
   
   const initDropOffHandler = () => {
     const copyData = {...machineData};
@@ -65,7 +65,7 @@ const CourierSend = () => {
   if(status === 'idle'){
     content = 
     <>
-      <h3 style={{color: 'var(--primary-color)'}}>Parcel selected: {parcelID}</h3>
+      <h3 style={{color: 'var(--primary-color)'}}>Parcel ID: {name}</h3>
       <h3 style={{color: 'var(--primary-color)'}}>Password: {input.password}</h3>
       <button onClick={createNewCode} className='secondary-btn courier-login-btn'>Generate new code</button>
       <button onClick={initDropOffHandler} className='primary-btn courier-login-btn'>Drop-off package</button>
@@ -81,7 +81,6 @@ const CourierSend = () => {
     <div style={{width: '100%', height: '100vh', display: 'flex', alignItems:'center', justifyContent:'center'}}>
       <h2>Drop-off is successful! The system is logging you out!</h2>
     </div>
-
   }
 
 
