@@ -1,23 +1,5 @@
 # Package-machine app
 
-## CREATE
-Create route can create new couriers and new machines. Could create an admin app for this but now I used Postman to send requests, for simplicity.
-- Courier schema:
-  - name: string
-  - password: string (hashed on registering for safety)
-- Courier endpoint: 
-  - /api/v1/create/new-courier
-
-- Machine schema:
-  - aParcels: array of objects
-  - bParcels: array of objects
-  - cParcels: array of objects
-  - Schema of parcel objects populating these arrays:
-    - password: string, name: string, empty: boolean
-- Machine endpoint: 
-  - /api/v1/create/new-machine
-- Creating is simplified by only needing to send the numbers of parcels we would like the machine to have in each size. 
-
 ## .ENV ON FRONTEND
 Machine ID is stored manually on the frontend in an ENV variable, needs to be set when installing the app on-site.
 This ensure that the machine will be able to fetch it's data from the Mongo database, and it's data only, not other machines in the system.
